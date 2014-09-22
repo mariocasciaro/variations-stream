@@ -8,7 +8,7 @@ function VariationsStream(alphabet, size, options) {
     return new VariationsStream(alphabet, size, options);
   }
   
-  if(typeof size !== 'number' || isNaN(size)) {
+  if(typeof size !== 'number' || isNaN(parseInt(size))) {
     options = size;
     size = null;
   }
