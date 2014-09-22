@@ -1,0 +1,37 @@
+{
+  "name": "variations-stream",
+  "description": "Streams all the variations (with repetitions) of a set",
+  "version": "0.1.0",
+  "homepage": "https://github.com/mariocasciaro/variations-stream",
+  "author": {
+    "name": "Mario Casciaro"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mariocasciaro/variations-stream"
+  },
+  "bugs": {
+    "url": "https://github.com/mariocasciaro/variations-stream/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/mariocasciaro/variations-stream/blob/master/LICENSE"
+    }
+  ],
+  "dependencies": {
+    "readable-stream": "~1.0.32"
+  },
+  "devDependencies": {
+    "chai": "~1.9.1",
+    "mocha": "~1.21.4"
+  },
+  "scripts": {
+    "test": "node_modules/mocha/bin/_mocha test.js --reporter spec"
+  },
+  "keywords": [
+    "powerset",
+    "stream",
+    "combinations"
+  ]
+}
