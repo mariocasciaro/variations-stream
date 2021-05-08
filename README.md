@@ -20,13 +20,19 @@ npm install variations-stream
 ```javascript
 var variationsStream = require('variations-stream');
 
+// If don't want to specify minLength of guesses 
 variationsStream('abc', 2)
   .on('data', function(comb) {
     console.log(comb);
-  });
+});
+ 
+ // If want to specify both minLength and maxLength of guesses
+ variationsStream('abc', { minLength: 1, maxLength: 2 })
+  .on('data', function(comb) {
+    console.log(comb);
+ });
 
 /* Prints:
-
 a
 b
 c
@@ -39,7 +45,6 @@ cb
 ac
 bc
 cc
-
 */
 
 ```
