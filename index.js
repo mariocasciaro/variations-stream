@@ -1,22 +1,32 @@
-var Readable = require("readable-stream").Readable;
-var util = require("util");
+let Readable = require("readable-stream").Readable;
+let util = require("util");
 util.inherits(VariationsStream, Readable);
 module.exports = VariationsStream;
 
-function VariationsStream(alphabet, options) {
+function VariationsStream(alphabet, ...options) {
   if (!(this instanceof VariationsStream)) {
-    return new VariationsStream(alphabet, options);
+    return new VariationsStream(alphabet, ...options);
   }
 
-  options = options || {};
-  var opt = {
+  let scope = options?.[0];
+  options = options?.[1] || {};
+  if (
+    typeof scope === "number" ||
+    (typeof scope === "string" && !isNaN(parseInt(scope)))
+  ) {
+    scope = { maxLength: parseInt(scope) };
+  } else {
+    scope = scope || {};
+  }
+
+  let opt = {
     objectMode: true,
     highWaterMark: 10000,
   };
   Readable.call(this, opt);
   this.alphabet = alphabet;
-  this.minLength = options.minLength || 1;
-  this.maxLength = options.maxLength || alphabet.length;
+  this.minLength = scope.minLength || 1;
+  this.maxLength = scope.maxLength || alphabet.length;
   if (this.minLength < 0) this.minLength = 1;
   if (this.maxLength < 0) this.maxLength = alphabet.length;
   this.indexes = [];
@@ -24,14 +34,14 @@ function VariationsStream(alphabet, options) {
     this.indexes.push(0);
   }
   this.isString = typeof this.alphabet === "string";
-  this.sync = options.sync;
+  this.sync = options.sync || scope.sync;
 }
 
 VariationsStream.prototype.next = function () {
-  var self = this;
+  let self = this;
   if (!self.indexes) return null;
 
-  var word = self.indexes.map((idx) => self.alphabet[idx]);
+  let word = self.indexes.map((idx) => self.alphabet[idx]);
   if (this.isString) {
     word = word.join("");
   }
@@ -52,9 +62,9 @@ VariationsStream.prototype.next = function () {
 };
 
 VariationsStream.prototype._push = function () {
-  var self = this;
-  var word;
-  var backPressure = false;
+  let self = this;
+  let word;
+  let backPressure = false;
   do {
     const next = self.next();
     word = next;
@@ -66,7 +76,7 @@ VariationsStream.prototype._read = function () {
   if (this.sync) {
     this._push();
   } else {
-    var self = this;
+    let self = this;
     setImmediate(function () {
       self.push(self.next());
     });
