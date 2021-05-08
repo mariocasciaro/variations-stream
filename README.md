@@ -26,11 +26,11 @@ variationsStream('abc', 2)
     console.log(comb);
 });
  
- // If want to specify both minLength and maxLength of guesses
- variationsStream('abc', { minLength: 1, maxLength: 2 })
+// If want to specify both minLength and maxLength of guesses
+variationsStream('abc', { minLength: 1, maxLength: 2 })
   .on('data', function(comb) {
     console.log(comb);
- });
+});
 
 /* Prints:
 a
@@ -52,3 +52,4 @@ cc
 ### Credits
 
 * [Mario Casciaro](https://github.com/mariocasciaro) - Author
+* [Tirth Patel](https://github.com/tirrth) - Contributor
