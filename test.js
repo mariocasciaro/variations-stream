@@ -1,5 +1,4 @@
 var VariationsStream = require("./");
-var mocha = require("mocha");
 var expect = require("chai").expect;
 
 describe("variations-stream", function () {
@@ -88,7 +87,7 @@ describe("variations-stream", function () {
       "ddd",
     ];
     var results = [];
-    var variationsStream = VariationsStream(alphabet, {
+    var variationsStream = new VariationsStream(alphabet, {
       minLength: 2,
       maxLength: 3,
     });
