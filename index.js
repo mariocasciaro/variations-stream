@@ -39,7 +39,7 @@ class VariationsStream {
 
   next() {
     let self = this;
-    if (!self.indexes || this.exit) return null;
+    if (!self.indexes || self.exit) return null;
 
     let word = self.indexes.map((idx) => self.alphabet[idx]);
     if (this.isString) {
