@@ -66,8 +66,7 @@ class VariationsStream {
     let word;
     let backPressure = false;
     do {
-      const next = self.next();
-      word = next;
+      word = self.next();
       backPressure = !self.push(word);
     } while (word && !backPressure);
   }
