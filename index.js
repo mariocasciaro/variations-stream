@@ -34,12 +34,12 @@ class VariationsStream {
     }
     this.isString = typeof this.alphabet === "string";
     this.sync = options.sync || scope.sync;
-    this.is_exit = false;
+    this.exit = false;
   }
 
   next() {
     let self = this;
-    if (!self.indexes || this.is_exit) return null;
+    if (!self.indexes || this.exit) return null;
 
     let word = self.indexes.map((idx) => self.alphabet[idx]);
     if (this.isString) {
@@ -84,7 +84,7 @@ class VariationsStream {
   }
 
   _exit() {
-    this.is_exit = true;
+    this.exit = true;
   }
 }
 
